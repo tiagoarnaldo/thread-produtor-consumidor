@@ -12,54 +12,41 @@ public class Recurso {
 
 	public synchronized String get(int qual) {
 		
-//		while(this.disponivel == false) {
-//			
-//			try {
-//				//Aguarda o produtor colocar um valor
-//				wait();
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		this.disponivel = false;
-//		notifyAll();
+		while(this.disponivel == false) {
+			
+			try {
+				//Aguarda o produtor colocar um valor
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		this.disponivel = false;
+		notifyAll();
 		
-		System.out.println("Consumidor #"+qual+" get: "+ conteudo);
+		System.out.println("Consumidor " + qual + " get: " + conteudo);
+		
 		return this.conteudo;
 	}
 	
-	public synchronized void put(int qual, int value) {
+	
+	public synchronized void put(int qual, String valor) {
 		
-//		while(this.disponivel == true) {
-//			try {
-//				//Aguarda o consumidor remover o valor
-//				wait();
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//		}
-		System.out.println("Produtor   #"+qual+" put: "+ value);
-		this.conteudo += value;
-//		this.disponivel=true;
-//		notifyAll();
+		while(this.disponivel == true) {
+			try {
+				//Aguarda o consumidor remover o valor
+				wait();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+
+		this.conteudo = valor;
+		this.disponivel=true;
+		notifyAll();
+		
+		System.out.println("=====> Produtor   #"+qual+" put: "+ valor);
 		
 	}
-	
-//	public synchronized void put(int qual, int value) {
-//		
-//		while(this.disponivel == true) {
-//			try {
-//				//Aguarda o consumidor remover o valor
-//				wait();
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//		}
-//		System.out.println("Produtor   #"+qual+" put: "+ value);
-//		this.conteudo = value;
-//		this.disponivel=true;
-//		notifyAll();
-//		
-//	}
 
 }

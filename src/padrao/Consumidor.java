@@ -13,17 +13,12 @@ public class Consumidor extends Thread {
 	@Override
 	public void run() {
 
-		String value = "0";
-		int i = 0;
+		String valor = "0";
 
 		while (true) {
 
-			value = recurso.get(numero); // TODO get(numero)
-			try {
-				sleep(5000);
-			} catch (InterruptedException e) {
-			}
-			i++;
+			valor = recurso.get(numero);
+
 		}
 	}
 

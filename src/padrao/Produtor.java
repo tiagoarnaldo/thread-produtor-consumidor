@@ -17,9 +17,10 @@ public class Produtor extends Thread {
 
 		while (true) {
 
-			recurso.put(numero, i);
+			recurso.put(numero, ""+i);
+
 			try {
-				sleep(10000);
+				sleep(1000);
 			} catch (InterruptedException e) {
 			}
 			i++;
